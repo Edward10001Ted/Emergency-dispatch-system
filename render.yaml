@@ -1,0 +1,123 @@
+services:
+  - type: web
+    name: eds-auth
+    runtime: go
+    rootDir: services/auth
+    plan: free
+    buildCommand: go build -o bin/auth-service ./cmd
+    startCommand: ./bin/auth-service
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: AUTH_DB_HOST
+        sync: false
+      - key: AUTH_DB_PORT
+        sync: false
+      - key: AUTH_DB_USER
+        sync: false
+      - key: AUTH_DB_PASSWORD
+        sync: false
+      - key: AUTH_DB_NAME
+        sync: false
+      - key: AUTH_DB_SSLMODE
+        sync: false
+      - key: RABBITMQ_URL
+        sync: false
+
+  - type: web
+    name: eds-dispatch
+    runtime: go
+    rootDir: services/dispatch
+    plan: free
+    buildCommand: go build -o bin/dispatch-service ./cmd
+    startCommand: ./bin/dispatch-service
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: DISPATCH_DB_HOST
+        sync: false
+      - key: DISPATCH_DB_PORT
+        sync: false
+      - key: DISPATCH_DB_USER
+        sync: false
+      - key: DISPATCH_DB_PASSWORD
+        sync: false
+      - key: DISPATCH_DB_NAME
+        sync: false
+      - key: DISPATCH_DB_SSLMODE
+        sync: false
+      - key: RABBITMQ_URL
+        sync: false
+
+  - type: web
+    name: eds-incident
+    runtime: go
+    rootDir: services/incident
+    plan: free
+    buildCommand: go build -o bin/incident-service ./cmd
+    startCommand: ./bin/incident-service
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: INCIDENT_DB_HOST
+        sync: false
+      - key: INCIDENT_DB_PORT
+        sync: false
+      - key: INCIDENT_DB_USER
+        sync: false
+      - key: INCIDENT_DB_PASSWORD
+        sync: false
+      - key: INCIDENT_DB_NAME
+        sync: false
+      - key: INCIDENT_DB_SSLMODE
+        sync: false
+      - key: RABBITMQ_URL
+        sync: false
+      - key: DISPATCH_SERVICE_URL
+        sync: false
+
+  - type: web
+    name: eds-analytics
+    runtime: go
+    rootDir: services/analytics
+    plan: free
+    buildCommand: go build -o bin/analytics-service ./cmd
+    startCommand: ./bin/analytics-service
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: ANALYTICS_DB_HOST
+        sync: false
+      - key: ANALYTICS_DB_PORT
+        sync: false
+      - key: ANALYTICS_DB_USER
+        sync: false
+      - key: ANALYTICS_DB_PASSWORD
+        sync: false
+      - key: ANALYTICS_DB_NAME
+        sync: false
+      - key: ANALYTICS_DB_SSLMODE
+        sync: false
+      - key: RABBITMQ_URL
+        sync: false
+      - key: DISPATCH_SERVICE_URL
+        sync: false
+      - key: INCIDENT_SERVICE_URL
+        sync: false
+      - key: CORS_ALLOW_ORIGINS
+        sync: false
+
+  - type: web
+    name: eds-realtime-gateway
+    runtime: go
+    rootDir: services/realtime-gateway
+    plan: free
+    buildCommand: go build -o bin/realtime-gateway ./cmd
+    startCommand: ./bin/realtime-gateway
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: RABBITMQ_URL
+        sync: false
+      - key: CORS_ALLOW_ORIGINS
+        sync: false
